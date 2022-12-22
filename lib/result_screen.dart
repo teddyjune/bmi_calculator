@@ -26,6 +26,28 @@ class ResultScreen extends StatelessWidget {
     return result;
   }
 
+  Widget _buildIcon(double bmi) {
+    Icon icon = const Icon(
+      Icons.sentiment_dissatisfied,
+      color: Colors.green,
+      size: 100,
+    );
+    if (bmi >= 23) {
+      icon = const Icon(
+        Icons.sentiment_very_dissatisfied,
+        color: Colors.green,
+        size: 100,
+      );
+    } else if (bmi >= 18.5) {
+      icon = const Icon(
+        Icons.sentiment_satisfied_alt,
+        color: Colors.green,
+        size: 100,
+      );
+    }
+    return icon;
+  }
+
   @override
   Widget build(BuildContext context) {
     final double bmi = weight / ((height / 100) * (height / 100));
@@ -42,11 +64,7 @@ class ResultScreen extends StatelessWidget {
               _calcBmi(bmi),
               style: const TextStyle(fontSize: 36),
             ),
-            const Icon(
-              Icons.sentiment_satisfied_alt,
-              color: Colors.green,
-              size: 100,
-            ),
+            _buildIcon(bmi),
           ],
         ),
       ),

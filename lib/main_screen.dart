@@ -63,7 +63,7 @@ class _MainScreenState extends State<MainScreen> {
                     MaterialPageRoute(
                         builder: (context) => const ResultScreen(
                               height: 160,
-                              weight: 54.5,
+                              weight: 51.5,
                             )),
                   );
                 },
