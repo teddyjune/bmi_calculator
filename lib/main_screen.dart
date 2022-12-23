@@ -14,6 +14,13 @@ class _MainScreenState extends State<MainScreen> {
   final _weightController = TextEditingController();
 
   @override
+  void dispose() {
+    _heightController.dispose();
+    _weightController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('비만도 계산기')),
@@ -55,15 +62,15 @@ class _MainScreenState extends State<MainScreen> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState?.validate() ?? false) {
+                  if (_formKey.currentState?.validate() == false) {
                     return;
                   }
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const ResultScreen(
-                              height: 160,
-                              weight: 51.5,
+                        builder: (context) => ResultScreen(
+                              height: double.parse(_heightController.text),
+                              weight: double.parse(_weightController.text),
                             )),
                   );
                 },
