@@ -1,5 +1,6 @@
 import 'package:bmi_calculator/result_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -15,9 +16,17 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void dispose() {
+    //앱이 종료되는 시점에 키와 몸무게 저장
+    save();
     _heightController.dispose();
     _weightController.dispose();
     super.dispose();
+  }
+
+  Future save() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble('height', double.parse(_heightController.text));
+    await prefs.setDouble('weight', double.parse(_weightController.text));
   }
 
   @override
